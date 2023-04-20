@@ -7,11 +7,13 @@ import java.io.IOException;
 import java.net.http.WebSocket.Listener;
 import java.util.logging.Level;
 
-import org.bukkit.command.Command;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener {
@@ -51,7 +53,46 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
     	
         
+        /**
+         * NEW CRAFT
+         */
+        crafts();
+        
     	this.getLogger().log(Level.INFO, "Chargé !");
+    }
+    
+    private void crafts() {
+    	//SELLE
+    	ItemStack saddle = new ItemStack(Material.SADDLE);
+    	@SuppressWarnings("deprecation")
+		ShapedRecipe craftSaddle = new ShapedRecipe(saddle);
+    	
+    	craftSaddle.shape("LLL","SAS","TAT");
+    	
+    	craftSaddle.setIngredient('L', Material.LEATHER);
+    	craftSaddle.setIngredient('S', Material.STRING);
+    	craftSaddle.setIngredient('A', Material.AIR);
+    	craftSaddle.setIngredient('T', Material.TRIPWIRE_HOOK);
+    	
+    	getServer().addRecipe(craftSaddle);
+    	
+    	
+    	//ARMURE CHEVAUX DIAMANT
+    	ItemStack diamondArmor = new ItemStack(Material.DIAMOND_HORSE_ARMOR);
+    	@SuppressWarnings("deprecation")
+		ShapedRecipe crafDiamondArmor = new ShapedRecipe(diamondArmor);
+    	
+    	crafDiamondArmor.shape("SCS","PLP","BAB");
+    	
+    	crafDiamondArmor.setIngredient('S', Material.STRING);
+    	crafDiamondArmor.setIngredient('C', Material.SADDLE);
+    	crafDiamondArmor.setIngredient('P', Material.DIAMOND_LEGGINGS);
+    	crafDiamondArmor.setIngredient('L', Material.LEATHER);
+    	crafDiamondArmor.setIngredient('B', Material.DIAMOND_BOOTS);
+    	crafDiamondArmor.setIngredient('A', Material.AIR);
+    	
+    	
+    	getServer().addRecipe(crafDiamondArmor);
     }
     
     
