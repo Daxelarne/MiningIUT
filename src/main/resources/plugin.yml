@@ -1,0 +1,5 @@
+name: MiningIUT
+version: 0.1
+author: Daxelarne
+main: daxelarne.knightworld.MiningIUT.Main
+api-version: 1.19
