@@ -8,6 +8,7 @@ import java.net.http.WebSocket.Listener;
 import java.util.logging.Level;
 
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -64,8 +65,9 @@ public class Main extends JavaPlugin implements Listener {
     private void crafts() {
     	//SELLE
     	ItemStack saddle = new ItemStack(Material.SADDLE);
-    	@SuppressWarnings("deprecation")
-		ShapedRecipe craftSaddle = new ShapedRecipe(saddle);
+    	NamespacedKey nk = new NamespacedKey(this, "saddle");
+    	
+		ShapedRecipe craftSaddle = new ShapedRecipe(nk, saddle);
     	
     	craftSaddle.shape("LLL","SAS","TAT");
     	
@@ -79,8 +81,9 @@ public class Main extends JavaPlugin implements Listener {
     	
     	//ARMURE CHEVAUX DIAMANT
     	ItemStack diamondArmor = new ItemStack(Material.DIAMOND_HORSE_ARMOR);
-    	@SuppressWarnings("deprecation")
-		ShapedRecipe crafDiamondArmor = new ShapedRecipe(diamondArmor);
+    	
+    	nk = new NamespacedKey(this, "diamondarmor");
+		ShapedRecipe crafDiamondArmor = new ShapedRecipe(nk, diamondArmor);
     	
     	crafDiamondArmor.shape("SCS","PLP","BAB");
     	
