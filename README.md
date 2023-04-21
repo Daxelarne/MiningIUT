@@ -14,7 +14,7 @@ Plugin de crafts et d'items spéciaux de l'IUT info de Lille
  
 ## Commandes :
  
- - /xpbottle [<joueur> <nombre>] : pour se donner une bouteille ou un nombre x de bouteille à un joueur
+ - /xpbottle [joueur nombre] : pour se donner une bouteille ou un nombre x de bouteille à un joueur
  
 ## Permissions :
  
