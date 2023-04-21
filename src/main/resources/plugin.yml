@@ -3,3 +3,12 @@ version: 0.2
 author: Daxelarne
 main: daxelarne.knightworld.MiningIUT.Main
 api-version: 1.19
+
+commands:
+  xpbottle:
+     usage: xpbottle [<player> <amount>]
+     permission: xpbotte.xpbottle
+     
+permissions:
+  xpbotte.xpbottle:
+    description: Permet de se give des bouteilles d'xp

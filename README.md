@@ -14,11 +14,11 @@ Plugin de crafts et d'items spéciaux de l'IUT info de Lille
  
 ## Commandes :
  
- - Aucune pour le moment
+ - /xpbottle [<joueur> <nombre>] : pour se donner une bouteille ou un nombre x de bouteille à un joueur
  
 ## Permissions :
  
- - Aucune pour le moment
+ - xpbottle.xpbottle : /xpbottle
  
 ## Fichier par défaut :
 
@@ -30,6 +30,8 @@ Plugin de crafts et d'items spéciaux de l'IUT info de Lille
   error-prefix: '&4[&cErreur&4]&c'
   no-permission: Vous n'avez pas la permission de faire cette commande !
   no-value: Informations manquante, merci d'utiliser la commande correctement !
+  no-player: Le joueur n'est pas connecte
+  not-enough-xp: Vous n'avez pas assez d'éxpérience pour faire cela
   ```
 </details>
 

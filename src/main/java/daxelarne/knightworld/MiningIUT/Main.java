@@ -5,16 +5,21 @@ import static org.bukkit.Bukkit.getPlayer;
 import java.io.File;
 import java.io.IOException;
 import java.net.http.WebSocket.Listener;
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener {
@@ -52,12 +57,18 @@ public class Main extends JavaPlugin implements Listener {
          * EVENTS
          */
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
+        getServer().getPluginManager().registerEvents(new xpbottle(), this);
     	
         
         /**
          * NEW CRAFT
          */
         crafts();
+        
+        /**
+         * INIT
+         */
+
         
     	this.getLogger().log(Level.INFO, "Chargé !");
     }
@@ -96,6 +107,34 @@ public class Main extends JavaPlugin implements Listener {
     	
     	
     	getServer().addRecipe(crafDiamondArmor);
+    	
+    	//XB BOTTLE
+    	ItemStack xpBottle = new ItemStack(Material.GLASS_BOTTLE);
+    	xpBottle.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+    	
+    	
+    	ItemMeta itemmeta = xpBottle.getItemMeta();
+		itemmeta.setDisplayName("§6Bouteille d'XP §e(vide)");
+		ArrayList<String> lore = new ArrayList<String>();
+		lore.add("§ePeux contenir 10 niveaux");
+		itemmeta.setLore(lore);
+		
+		itemmeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		
+		xpBottle.setItemMeta(itemmeta);
+    	
+    	nk = new NamespacedKey(this, "xpbottle");
+		ShapedRecipe crafXpBottle = new ShapedRecipe(nk, xpBottle);
+    	
+		crafXpBottle.shape("ASA","SBS","ASA");
+    	
+		crafXpBottle.setIngredient('S', Material.AMETHYST_SHARD);
+		crafXpBottle.setIngredient('B', Material.GLASS_BOTTLE);
+		crafXpBottle.setIngredient('A', Material.AIR);
+    	
+    	
+    	getServer().addRecipe(crafXpBottle);
+    	
     }
     
     
@@ -128,6 +167,28 @@ public class Main extends JavaPlugin implements Listener {
 		
 	}
     
+    
+    
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    	
+    	/**
+		 * Affichage valeur
+		 */
+    	if(command.getName().toLowerCase().equals("xpbottle")) {
+    		
+    		//S'il n'à pas la permission
+			if(hasPermission(sender, "xpbottle.xpbottle")) {
+				
+				new xpbottle(sender, command, label, args);
+				
+			}
+    	
+    	} 
+    	
+    	
+    	return true;
+    }
     
     
     //Check si un joueur possède la permission
