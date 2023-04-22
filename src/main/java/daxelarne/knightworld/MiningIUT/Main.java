@@ -31,6 +31,7 @@ public class Main extends JavaPlugin implements Listener {
 	
 	private FileConfiguration config;
 	protected static int maxEntity=256;
+	@SuppressWarnings("unused")
 	private static BukkitTask task;
 	
 
@@ -66,7 +67,8 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
         getServer().getPluginManager().registerEvents(new xpbottle(), this);
         getServer().getPluginManager().registerEvents(new limitEntity(), this);
-    	
+        getServer().getPluginManager().registerEvents(new spawnerPick(), this);
+        
         
         /**
          * NEW CRAFT
@@ -143,6 +145,40 @@ public class Main extends JavaPlugin implements Listener {
     	
     	getServer().addRecipe(crafXpBottle);
     	
+    	
+    	//PIOCHE SPAWNER
+    	ItemStack spawnerPickaxe = new ItemStack(Material.GOLDEN_PICKAXE);
+    	spawnerPickaxe.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+    	
+    	
+    	ItemMeta itemmetaSp = spawnerPickaxe.getItemMeta();
+    	itemmetaSp.setDisplayName("§6Pioche spawner");
+		ArrayList<String> lore1 = new ArrayList<String>();
+		lore1.add("§eUtilisations restantes : §610");
+		itemmetaSp.setLore(lore1);
+		
+		itemmetaSp.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		
+		spawnerPickaxe.setItemMeta(itemmetaSp);
+    	
+    	nk = new NamespacedKey(this, "spawnerpick");
+    	
+		ShapedRecipe crafspawnerPickaxe = new ShapedRecipe(nk, spawnerPickaxe);
+    	
+		crafspawnerPickaxe.shape("AEA","SPT","ABA");
+    	
+		ItemStack book = new ItemStack(Material.ENCHANTED_BOOK);
+		book.addUnsafeEnchantment(Enchantment.SILK_TOUCH, 1);
+		
+		crafspawnerPickaxe.setIngredient('E', Material.ENDER_EYE);
+		crafspawnerPickaxe.setIngredient('S', Material.AMETHYST_SHARD);
+		crafspawnerPickaxe.setIngredient('P', Material.GOLDEN_PICKAXE);
+		crafspawnerPickaxe.setIngredient('T', Material.GHAST_TEAR);
+		crafspawnerPickaxe.setIngredient('B', book.getData());
+		crafspawnerPickaxe.setIngredient('A', Material.AIR);
+    	
+    	
+    	getServer().addRecipe(crafspawnerPickaxe);
     }
     
     
