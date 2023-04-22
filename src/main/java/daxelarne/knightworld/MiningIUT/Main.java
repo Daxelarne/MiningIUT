@@ -6,10 +6,14 @@ import java.io.File;
 import java.io.IOException;
 import java.net.http.WebSocket.Listener;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.logging.Level;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -21,11 +25,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 public class Main extends JavaPlugin implements Listener {
 	
 	private FileConfiguration config;
 	protected static int maxEntity=256;
+	private static BukkitTask task;
 	
 
 	@Override
@@ -70,7 +76,7 @@ public class Main extends JavaPlugin implements Listener {
         /**
          * INIT
          */
-
+        spammingBot();
         
     	this.getLogger().log(Level.INFO, "Chargé !");
     }
@@ -169,6 +175,22 @@ public class Main extends JavaPlugin implements Listener {
 		
 	}
     
+    
+    protected static void spammingBot() {
+		task = Bukkit.getServer().getScheduler().runTaskTimer(Bukkit.getServer().getPluginManager().getPlugin("MiningIUT"), () -> {
+			try {
+				for(World w : Bukkit.getWorlds()) {
+					for(Chunk c : w.getLoadedChunks()) {
+						if(c.getInhabitedTime()==0 && !c.isForceLoaded()) {
+							c.unload();
+						}
+					}
+				}
+			} catch(ConcurrentModificationException e) {
+				//Juste Java qui est stupide
+			}
+		 }, 20, 20 );
+    }
     
     
     @Override
