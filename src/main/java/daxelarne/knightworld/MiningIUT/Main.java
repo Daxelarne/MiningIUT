@@ -25,6 +25,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin implements Listener {
 	
 	private FileConfiguration config;
+	protected static int maxEntity=256;
 	
 
 	@Override
@@ -42,9 +43,9 @@ public class Main extends JavaPlugin implements Listener {
     	/**
     	 * CONFIG
     	 */
-    	//saveDefaultConfig();
-        //config = getConfig();
-        //getConfigValues();
+    	saveDefaultConfig();
+        config = getConfig();
+        getConfigValues();
 
         
         /**
@@ -58,6 +59,7 @@ public class Main extends JavaPlugin implements Listener {
          */
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
         getServer().getPluginManager().registerEvents(new xpbottle(), this);
+        getServer().getPluginManager().registerEvents(new limitEntity(), this);
     	
         
         /**
@@ -208,6 +210,7 @@ public class Main extends JavaPlugin implements Listener {
   	private void getConfigValues() {
   		try {
   			//wordResetTitle=config.getString("wordResetTitle");
+  			maxEntity=config.getInt("MaxEntityByChunk");
           } catch(Exception e) {
           	disablePl(e);
           }
@@ -228,10 +231,6 @@ public class Main extends JavaPlugin implements Listener {
 	
 	private void sendNoPerm(CommandSender sender) {
 		sender.sendMessage(Lang.ERROR_PREFIX.toString() + Lang.NO_PERM.toString());
-	}
-  	
-  	private void sendNoValue(CommandSender sender) {
-		sender.sendMessage(Lang.ERROR_PREFIX.toString() + Lang.NO_VALUE.toString());
 	}
   	
 }
