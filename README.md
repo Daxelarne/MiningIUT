@@ -39,7 +39,7 @@ Plugin de crafts et d'items spéciaux de l'IUT info de Lille
   <summary>config.yml</summary>
 
   ```
-  # CONFIG PAR DEFAULT
-  PARAM: VALEUR
+  # Max entity by chunk
+  MaxEntityByChunk: 256
   ```
 </details>
