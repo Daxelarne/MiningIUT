@@ -12,7 +12,7 @@ public class limitEntity implements Listener {
 	
 	@EventHandler
 	public void onPlaceEntity(EntityPlaceEvent event) {
-		if(event.getPlayer().getLocation().getChunk().getEntities().length>=Main.maxEntity) {
+		if(event.getEntity().getLocation().getChunk().getEntities().length>=Main.maxEntity) {
 			event.setCancelled(true);
 			event.getPlayer().sendMessage(Lang.ERROR_PREFIX.toString() + Lang.MAX_ENTITY.toString());
 			
