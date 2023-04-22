@@ -32,6 +32,7 @@ Plugin de crafts et d'items spéciaux de l'IUT info de Lille
   no-value: Informations manquante, merci d'utiliser la commande correctement !
   no-player: Le joueur n'est pas connecte
   not-enough-xp: Vous n'avez pas assez d'éxpérience pour faire cela
+  max-entity: Le nombre d'entité à était atteinte dans le chunk
   ```
 </details>
 
