@@ -78,6 +78,8 @@ public class spawnerPick implements Listener{
 				
 			}
 			
+		} else {
+			event.setCancelled(true);
 		}
 	}
 	
