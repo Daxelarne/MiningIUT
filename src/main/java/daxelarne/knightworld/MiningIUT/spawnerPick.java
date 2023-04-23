@@ -20,7 +20,7 @@ public class spawnerPick implements Listener{
 	
 	@EventHandler
 	public void mineSpawner(BlockBreakEvent event) {
-		if(event.getBlock().getType().equals(Material.SPAWNER)) {
+		
 		
 			ItemStack playerMining = event.getPlayer().getInventory().getItemInMainHand();
 			if(playerMining.getType().equals(Material.GOLDEN_PICKAXE)
@@ -28,6 +28,8 @@ public class spawnerPick implements Listener{
 					&& playerMining.getItemMeta().getDisplayName().equals("§6Pioche spawner")
 					) {
 
+				
+				if(event.getBlock().getType().equals(Material.SPAWNER)) {
 				
 				event.setCancelled(true);
 				
@@ -76,11 +78,11 @@ public class spawnerPick implements Listener{
 				
 				//event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(), (ItemStack) spawner);
 				
+			} else {
+				event.setCancelled(true);
 			}
 			
-		} else {
-			event.setCancelled(true);
-		}
+		} 
 	}
 	
 	@EventHandler
