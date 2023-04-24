@@ -39,7 +39,7 @@ public class Main extends JavaPlugin implements Listener {
     public void onDisable() {
         super.onDisable();
         
-
+        task.cancel();
 	 }
 
     @Override
@@ -64,11 +64,13 @@ public class Main extends JavaPlugin implements Listener {
         /**
          * EVENTS
          */
-        getServer().getPluginManager().registerEvents(new JoinEvent(), this);
+        getServer().getPluginManager().registerEvents(new JoinAndDeathEvent(), this);
         getServer().getPluginManager().registerEvents(new xpbottle(), this);
         getServer().getPluginManager().registerEvents(new limitEntity(), this);
         getServer().getPluginManager().registerEvents(new spawnerPick(), this);
         getServer().getPluginManager().registerEvents(new NoEndGateaway(), this);
+        getServer().getPluginManager().registerEvents(new LootWarden(), this);
+        
         
         
         /**

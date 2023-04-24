@@ -4,7 +4,7 @@
 
     <artifactId>MiningIUT</artifactId>
     <groupId>daxelarne.knightworld</groupId>
-    <version>0.6</version>
+    <version>0.7</version>
 	
 	<properties>
 		<maven.compiler.source>15</maven.compiler.source>
