@@ -10,7 +10,8 @@ public enum Lang {
 	NO_VALUE("no-value","Informations manquante, merci d'utiliser la commande correctement !"),
 	BAD_PLAYER("no-player","Le joueur n'est pas connecte"),
 	NOT_ENOUGH_XP("not-enough-xp","Vous n'avez pas assez d'éxpérience pour faire cela"),
-	MAX_ENTITY("max-entity","Le nombre d'entité à était atteinte dans le chunk");
+	MAX_ENTITY("max-entity","Le nombre d'entité à était atteinte dans le chunk"),
+	WARDEN_DROP("warden_drop","&ePour avoir tué le Warden vous avez eu : &6&l{1}");
 	
 	
 	private String path;

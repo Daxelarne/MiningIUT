@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -34,22 +35,33 @@ public class LootWarden implements Listener{
 							)
 					) {
 				
-				ItemStack item = new ItemStack(Material.SPAWNER, 1);
-				List<String> lore = new ArrayList<String>();
+				if(r.nextInt(maxEntity)%2==0) {
+					Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "eco give "+event.getDamager().getName()+" 2500");
+					
+					Bukkit.getPlayer(event.getDamager().getName()).sendMessage(Lang.WARDEN_DROP.toString().replace("{1}","2 500 coins"));
+				} else {
+					ItemStack item = new ItemStack(Material.SPAWNER, 1);
+					List<String> lore = new ArrayList<String>();
+					
+					EntitySpawnable e = EntitySpawnable.values()[r.nextInt(maxEntity)];
+					
+					@SuppressWarnings("deprecation")
+					String loreString =  EntityType.fromName(e.getName()).toString();
+					loreString = loreString.substring(0, 1).toUpperCase() + loreString.substring(1).toLowerCase();
+					loreString = loreString+" Spawner";
+					lore.add(loreString);
+					
+					ItemMeta meta = item.getItemMeta();
+					meta.setLore(lore);
+					item.setItemMeta(meta);
+					
+					event.getEntity().getLocation().getWorld().dropItem(event.getEntity().getLocation(), item);
+					
+					Bukkit.getPlayer(event.getDamager().getName()).sendMessage(Lang.WARDEN_DROP.toString().replace("{1}","Un spawner "+EntityType.fromName(e.getName()).toString()));
+				}
 				
-				EntitySpawnable e = EntitySpawnable.values()[r.nextInt(maxEntity)];
 				
-				@SuppressWarnings("deprecation")
-				String loreString =  EntityType.fromName(e.getName()).toString();
-				loreString = loreString.substring(0, 1).toUpperCase() + loreString.substring(1).toLowerCase();
-				loreString = loreString+" Spawner";
-				lore.add(loreString);
 				
-				ItemMeta meta = item.getItemMeta();
-				meta.setLore(lore);
-				item.setItemMeta(meta);
-				
-				event.getEntity().getLocation().getWorld().dropItem(event.getEntity().getLocation(), item);
 				
 		}
 	}
