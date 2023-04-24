@@ -23,6 +23,7 @@ public class LootWarden implements Listener{
 	private static int maxEntity = EntitySpawnable.values().length;
 
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onWardenDeath(EntityDamageByEntityEvent event) {
 
@@ -35,17 +36,12 @@ public class LootWarden implements Listener{
 							)
 					) {
 				
-				if(r.nextInt(maxEntity)%2==0) {
-					Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "eco give "+event.getDamager().getName()+" 2500");
-					
-					Bukkit.getPlayer(event.getDamager().getName()).sendMessage(Lang.WARDEN_DROP.toString().replace("{1}","2 500 coins"));
-				} else {
+				if(r.nextInt(maxEntity)==20){
 					ItemStack item = new ItemStack(Material.SPAWNER, 1);
 					List<String> lore = new ArrayList<String>();
 					
 					EntitySpawnable e = EntitySpawnable.values()[r.nextInt(maxEntity)];
 					
-					@SuppressWarnings("deprecation")
 					String loreString =  EntityType.fromName(e.getName()).toString();
 					loreString = loreString.substring(0, 1).toUpperCase() + loreString.substring(1).toLowerCase();
 					loreString = loreString+" Spawner";
@@ -58,7 +54,19 @@ public class LootWarden implements Listener{
 					event.getEntity().getLocation().getWorld().dropItem(event.getEntity().getLocation(), item);
 					
 					Bukkit.getPlayer(event.getDamager().getName()).sendMessage(Lang.WARDEN_DROP.toString().replace("{1}","Un spawner "+EntityType.fromName(e.getName()).toString()));
+				} else {
+					if(r.nextInt(maxEntity)%2==0) {
+						Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "eco give "+event.getDamager().getName()+" 50");
+						
+						Bukkit.getPlayer(event.getDamager().getName()).sendMessage(Lang.WARDEN_DROP.toString().replace("{1}","50 coins"));
+					} else {
+						Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "eco give "+event.getDamager().getName()+" 20");
+						
+						Bukkit.getPlayer(event.getDamager().getName()).sendMessage(Lang.WARDEN_DROP.toString().replace("{1}","20 coins"));
+					}
 				}
+				
+				
 				
 				
 				

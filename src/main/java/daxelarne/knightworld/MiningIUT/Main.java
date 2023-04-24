@@ -69,7 +69,8 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new limitEntity(), this);
         getServer().getPluginManager().registerEvents(new spawnerPick(), this);
         getServer().getPluginManager().registerEvents(new NoEndGateaway(), this);
-        getServer().getPluginManager().registerEvents(new LootWarden(), this);
+        //getServer().getPluginManager().registerEvents(new LootWarden(), this);
+        getServer().getPluginManager().registerEvents(new SpawnerSword(), this);
         
         
         
@@ -182,6 +183,40 @@ public class Main extends JavaPlugin implements Listener {
     	
     	
     	getServer().addRecipe(crafspawnerPickaxe);
+    	
+    	
+    	//PIOCHE SPAWNER
+    	ItemStack spawnerSword = new ItemStack(Material.GOLDEN_SWORD);
+    	spawnerSword.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
+    	spawnerSword.addUnsafeEnchantment(Enchantment.DAMAGE_ALL , 5);
+    	
+    	
+    	ItemMeta itemmetaSword = spawnerPickaxe.getItemMeta();
+    	itemmetaSword.setDisplayName("§6Epée spawner");
+		ArrayList<String> lore2 = new ArrayList<String>();
+		lore2.add("§6Drop un spawner pour chaque type de mob ci-dessous");
+		lore2.add("§eCreeper : 0/§6200");
+		lore2.add("§eVache : 0/§6200");
+		lore2.add("§eMouton : 0/§6200");
+		itemmetaSword.setLore(lore2);
+		
+		spawnerSword.setItemMeta(itemmetaSword);
+    	
+    	nk = new NamespacedKey(this, "spawnersword");
+    	
+		ShapedRecipe crafspawnerSword = new ShapedRecipe(nk, spawnerSword);
+    	
+		crafspawnerSword.shape("LAL","ASA","BDB");
+
+		
+		crafspawnerSword.setIngredient('L', Material.LAPIS_LAZULI);
+		crafspawnerSword.setIngredient('A', Material.AMETHYST_SHARD);
+		crafspawnerSword.setIngredient('S', Material.GOLDEN_SWORD);
+		crafspawnerSword.setIngredient('B', book.getData());
+		crafspawnerSword.setIngredient('D', Material.DRAGON_BREATH);
+    	
+    	
+    	getServer().addRecipe(crafspawnerSword);
     }
     
     

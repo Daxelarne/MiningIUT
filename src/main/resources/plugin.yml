@@ -1,6 +1,6 @@
 api: "1.19"
 name: MiningIUT
-version: "0.7.2"
+version: "0.8"
 author: Daxelarne
 main: daxelarne.knightworld.MiningIUT.Main
 api-version: 1.19
