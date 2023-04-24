@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -50,5 +54,26 @@ public class LootWarden implements Listener{
 		}
 	}
 	
+	
+	@EventHandler
+	public void onCatalystActivate( EntitySpawnEvent event ) {
+		if(event.getEntityType().equals(EntityType.WARDEN)) {
+			int radius = 10;
+			Location loc = event.getLocation();
+			World world = loc.getWorld();
+			
+			for (int x = -radius; x < radius; x++) {
+			    for (int y = -radius; y < radius; y++) {
+			        for (int z = -radius; z < radius; z++) {
+			            Block block = world.getBlockAt(loc.getBlockX()+x, loc.getBlockY()+y, loc.getBlockZ()+z);
+			            if (block.getType() == Material.SCULK_SHRIEKER) {
+			                block.setType(Material.SCULK_SENSOR);
+			                return;
+			            }
+			        }
+			    }
+			}
+		}
+	}
 	
 }
