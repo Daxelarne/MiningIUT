@@ -69,7 +69,7 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new limitEntity(), this);
         getServer().getPluginManager().registerEvents(new spawnerPick(), this);
         getServer().getPluginManager().registerEvents(new NoEndGateaway(), this);
-        //getServer().getPluginManager().registerEvents(new LootWarden(), this);
+        getServer().getPluginManager().registerEvents(new LootWarden(), this);
         getServer().getPluginManager().registerEvents(new SpawnerSword(), this);
         
         
@@ -217,6 +217,10 @@ public class Main extends JavaPlugin implements Listener {
     	
     	
     	getServer().addRecipe(crafspawnerSword);
+    	
+    	//EATHERSTONE
+    	
+    	//HELLSTONE
     }
     
     

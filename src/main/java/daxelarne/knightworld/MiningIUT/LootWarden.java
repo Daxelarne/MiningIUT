@@ -1,29 +1,53 @@
 package daxelarne.knightworld.MiningIUT;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class LootWarden implements Listener{
 	private static Random r = new Random();
 	private static int maxEntity = EntitySpawnable.values().length;
+	
+	public void onWardenDeath(EntityDamageByEntityEvent event) {
 
+		if(event.getEntityType().equals(EntityType.WARDEN)
+				&& event.getDamager().getType().equals(EntityType.PLAYER)
+				&& (event.getEntity().isDead()  ||
+						((LivingEntity)event.getEntity()).getHealth()<=0
+						|| ((LivingEntity)event.getEntity()).getHealth()-event.getFinalDamage()<=0
+						
+						)
+				) {
+			
+			Location eventLocation = event.getEntity().getLocation();
+			
+			ExperienceOrb orb = (ExperienceOrb)  eventLocation.getWorld().spawn(eventLocation.add(0.5, 0.5, 0.5), ExperienceOrb.class);
+            orb.setExperience(100);
+            
+            ExperienceOrb orb1 = (ExperienceOrb)  eventLocation.getWorld().spawn(eventLocation.add(0.5, 0.5, 0.5), ExperienceOrb.class);
+            orb1.setExperience(100);
+            
+            ExperienceOrb orb2 = (ExperienceOrb)  eventLocation.getWorld().spawn(eventLocation.add(0.5, 0.5, 0.5), ExperienceOrb.class);
+            orb2.setExperience(100);
+            
+            ExperienceOrb orb3 = (ExperienceOrb)  eventLocation.getWorld().spawn(eventLocation.add(0.5, 0.5, 0.5), ExperienceOrb.class);
+            orb3.setExperience(100);
+			
+		}
+	}
 
-	@SuppressWarnings("deprecation")
+	
+	/*@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onWardenDeath(EntityDamageByEntityEvent event) {
 
@@ -72,7 +96,7 @@ public class LootWarden implements Listener{
 				
 				
 		}
-	}
+	}*/
 	
 	
 	@EventHandler
