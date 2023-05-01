@@ -1,6 +1,6 @@
 api: "1.19"
 name: MiningIUT
-version: "0.8.1"
+version: "0.8.2"
 author: Daxelarne
 main: daxelarne.knightworld.MiningIUT.Main
 api-version: 1.19
@@ -9,6 +9,12 @@ commands:
   xpbottle:
      usage: xpbottle [<player> <amount>]
      permission: xpbotte.xpbottle
+  rank:
+     usage: <command>
+     description: Permet de choisir votre faction
+  faction:
+     usage: <commande>
+     description: Recevoir la liste des informations sur les factions
      
 permissions:
   xpbotte.xpbottle:
