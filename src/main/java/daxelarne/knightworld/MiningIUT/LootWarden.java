@@ -1,7 +1,5 @@
 package daxelarne.knightworld.MiningIUT;
 
-import java.util.Random;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -15,8 +13,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 
 public class LootWarden implements Listener{
-	private static Random r = new Random();
-	private static int maxEntity = EntitySpawnable.values().length;
+	/*private static Random r = new Random();
+	private static int maxEntity = EntitySpawnable.values().length;*/
 	
 	public void onWardenDeath(EntityDamageByEntityEvent event) {
 

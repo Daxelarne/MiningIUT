@@ -41,6 +41,8 @@ public class Faction implements Listener{
 		 }
 
 		 
+		
+		 
 		 inv.setItem(10, createGlowingGuiItem(Material.NETHERITE_SWORD, "§c§lAssassin", "§a§l+ §210% de loot sur les monstres", "§a§l+ §2Resistance 1 24h/24", "§a§l+ §2Atout de disparition", ""
 				 , "§c§l- §4Les pommes d'or de lui font rien", "§c§l- §43% de chance que la potion ne s'applique pas"));
 		 
@@ -68,31 +70,35 @@ public class Faction implements Listener{
 		
 		final Player p = (Player) e.getWhoClicked();
 		
-		if(e.getRawSlot()==10) {
-			
-			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user "+p.getName()+" parent set assassin" );
-			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "skillset "+p.getName()+" res" );
-			p.sendMessage("§6§l[§e§lFaction§6§l] §cBienvenue parmis les §lAssassins§c ! Gouverne le monde et extermine les tous !");
-			p.closeInventory();
-		} else if(e.getRawSlot()==12) {
-			
-			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user "+p.getName()+" parent set architecte" );
-			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "skillset "+p.getName()+" nv" );
-			p.sendMessage("§6§l[§e§lFaction§6§l] §2Bienvenue parmis les §lArchitectes§2 ! Donne vie à tes idées !");
-			p.closeInventory();
-		} else if(e.getRawSlot()==14) {
-			
-			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user "+p.getName()+" parent set fermier" );
-			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "skillset "+p.getName()+" speed" );
-			p.sendMessage("§6§l[§e§lFaction§6§l] §6Bienvenue parmis les §lFermiers§6 ! Profite d'une vie riche de nature !");
-			p.closeInventory();
-		} else if(e.getRawSlot()==16) {
-			
-			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user "+p.getName()+" parent set mineur" );
-			Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "skillset "+p.getName()+" haste" );
-			p.sendMessage("§6§l[§e§lFaction§6§l] §7Bienvenue parmis les §lMineurs§7 ! Que seul le son de ta pioche se fasse entendre !");
-			p.closeInventory();
-		}
+		 if(!p.hasPermission("group.fermier") && !p.hasPermission("group.mineur") && !p.hasPermission("group.assassin") && !p.hasPermission("group.architecte")) {
+			 if(e.getRawSlot()==10) {
+					
+					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user "+p.getName()+" parent set assassin" );
+					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "skillset "+p.getName()+" res" );
+					p.sendMessage("§6§l[§e§lFaction§6§l] §cBienvenue parmis les §lAssassins§c ! Gouverne le monde et extermine les tous !");
+					p.closeInventory();
+				} else if(e.getRawSlot()==12) {
+					
+					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user "+p.getName()+" parent set architecte" );
+					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "skillset "+p.getName()+" nv" );
+					p.sendMessage("§6§l[§e§lFaction§6§l] §2Bienvenue parmis les §lArchitectes§2 ! Donne vie à tes idées !");
+					p.closeInventory();
+				} else if(e.getRawSlot()==14) {
+					
+					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user "+p.getName()+" parent set fermier" );
+					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "skillset "+p.getName()+" speed" );
+					p.sendMessage("§6§l[§e§lFaction§6§l] §6Bienvenue parmis les §lFermiers§6 ! Profite d'une vie riche de nature !");
+					p.closeInventory();
+				} else if(e.getRawSlot()==16) {
+					
+					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "lp user "+p.getName()+" parent set mineur" );
+					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "skillset "+p.getName()+" haste" );
+					p.sendMessage("§6§l[§e§lFaction§6§l] §7Bienvenue parmis les §lMineurs§7 ! Que seul le son de ta pioche se fasse entendre !");
+					p.closeInventory();
+				}
+		 }
+		
+		
 	 }
 	
 	

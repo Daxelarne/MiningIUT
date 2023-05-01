@@ -31,8 +31,8 @@ public class Main extends JavaPlugin implements Listener {
 	
 	private FileConfiguration config;
 	protected static int maxEntity=256;
-	@SuppressWarnings("unused")
 	private static BukkitTask task;
+	static BukkitTask FactionTask;
 	
 
 	@Override
@@ -40,6 +40,7 @@ public class Main extends JavaPlugin implements Listener {
         super.onDisable();
         
         task.cancel();
+        FactionTask.cancel();
 	 }
 
     @Override
@@ -72,7 +73,8 @@ public class Main extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(new LootWarden(), this);
         getServer().getPluginManager().registerEvents(new SpawnerSword(), this);
         getServer().getPluginManager().registerEvents(new Faction(), this);
-        getServer().getPluginManager().registerEvents(new TenPercentReduction(), this);
+        getServer().getPluginManager().registerEvents(new FactionPercentPowerUp(), this);
+        getServer().getPluginManager().registerEvents(new FactionDebuf(), this);
         
         
         
@@ -292,15 +294,14 @@ public class Main extends JavaPlugin implements Listener {
     		
     		Player p = Bukkit.getPlayer(sender.getName());
     		
-    		if(!p.hasPermission("group.fermier") && !p.hasPermission("group.mineur") && !p.hasPermission("group.assassin") && !p.hasPermission("group.architecte")) {
+    		
 				
-    			Faction f = new Faction(sender);
-    			
-    			getServer().getPluginManager().registerEvents(f, this);
-    			
-    			f.openInventory(p);
-				
-			}
+			Faction f = new Faction(sender);
+			
+			getServer().getPluginManager().registerEvents(f, this);
+			
+			f.openInventory(p);
+		
     		
     		
     	} else if(command.getName().toLowerCase().equals("faction")) {

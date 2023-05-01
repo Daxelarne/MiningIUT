@@ -16,7 +16,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class TenPercentReduction implements Listener{
+public class FactionPercentPowerUp implements Listener{
 	private static Random r = new Random();
 	
 	
@@ -27,8 +27,10 @@ public class TenPercentReduction implements Listener{
 	@EventHandler
 	public void onKillMob(EntityDeathEvent event) {
 		if(!event.getEntityType().equals(EntityType.PLAYER)
+				&& ((LivingEntity) event.getEntity()).getKiller()!=null
 				&& ((LivingEntity) event.getEntity()).getKiller().getType().equals(EntityType.PLAYER)
 				&& Bukkit.getPlayer(((LivingEntity) event.getEntity()).getKiller().getName()).hasPermission("group.assassin")
+				&& !Bukkit.getPlayer(((LivingEntity) event.getEntity()).getKiller().getName()).hasPermission("faction.bypass")
 				) {
 			
 			
@@ -50,7 +52,9 @@ public class TenPercentReduction implements Listener{
 	public void onBlockPlaced(BlockPlaceEvent event) {
 			Player p = event.getPlayer();
 			
-			if(p.hasPermission("group.architecte") ) {
+			if(p.hasPermission("group.architecte")
+				&& !p.hasPermission("faction.bypass")
+					) {
 				Material m = event.getBlock().getType();
 				
 				//Shulk
@@ -113,6 +117,8 @@ public class TenPercentReduction implements Listener{
 						&& !m.equals(Material.RAW_GOLD_BLOCK)
 						&& !m.equals(Material.RAW_IRON_BLOCK)
 						
+						&& !m.equals(Material.SLIME_BLOCK)
+						
 						
 						//Random
 						&& r.nextInt(10)==0) {
@@ -131,6 +137,7 @@ public class TenPercentReduction implements Listener{
 			Material m = event.getBlock().getType();
 			
 			if(p.hasPermission("group.fermier")
+					&& !p.hasPermission("faction.bypass")
 					&& (
 							m.equals(Material.WHEAT)
 							|| m.equals(Material.BEETROOT)
@@ -171,6 +178,7 @@ public class TenPercentReduction implements Listener{
 			Material m = event.getBlock().getType();
 			
 			if(p.hasPermission("group.mineur")
+					&& !p.hasPermission("faction.bypass")
 					&& (
 							m.equals(Material.COAL_ORE)
 							||m.equals(Material.COPPER_ORE)
